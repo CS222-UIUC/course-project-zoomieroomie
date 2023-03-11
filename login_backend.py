@@ -18,8 +18,7 @@ def login():
         conn = sqlite3.connect("users.sql")
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT * FROM users WHERE username = ? AND \
-            password = ?",
+            """SELECT * FROM users WHERE username=? AND password=?""",
             (username, password),
         )
         user = cursor.fetchone()
@@ -38,7 +37,10 @@ def login():
 def dashboard():
     """Function that takes user to dashboard if logged in"""
     if "username" in session:
+        user = session["username"]
+        flash(f"Welcome {user}!", "success")
         return render_template("dashboard.html", username=session["username"])
+    flash("Please log in to access this page", "error")
     return redirect(url_for("login"))
 
 
