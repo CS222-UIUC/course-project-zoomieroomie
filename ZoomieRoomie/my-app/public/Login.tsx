@@ -4,11 +4,34 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  /*const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Submitted: ${username} - ${password}`);
-    // TODO: Implement login logic here
-  };
+    // TODO: Implement login logic here*/
+
+   const handleSubmit = async (event) => {
+   event.preventDefault();
+   
+   try {
+      const response = await fetch('/api/login', {
+         method: 'POST',
+         headers: {
+         'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({ username, password })
+      });
+   
+      if (response.ok) {
+         console.log('Login successful!');
+         // TODO: Redirect the user to the authenticated page
+      } else {
+         console.log('Invalid login credentials.');
+      }
+   } catch (error) {
+      console.error('Error:', error);
+   }
+   }
+
 
   return (
     <form onSubmit={handleSubmit}>
