@@ -22,8 +22,14 @@ class FlaskTestCase(unittest.TestCase):
             conn = sqlite3.connect("users.sql")
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO users (username, password) VALUES ('test', 'test')"
+                """DELETE FROM users WHERE username=? AND password=?""",
+                ("test", "test"),
             )
+            cursor.execute(
+                """INSERT INTO users (username, password) VALUES (?, ?)""",
+                ("test", "test"),
+            )
+            conn.commit()
 
     def tearDown(self):
         os.unlink(app.config["DATABASE"])
@@ -60,7 +66,7 @@ class FlaskTestCase(unittest.TestCase):
         """Testing dashboard success with valid user"""
         with self.app.session_transaction() as session:
             session["username"] = "test"
-        response = self.app.get("/dashboard")
+        response = self.app.get("/dashboard", follow_redirects=True)
         # self.assertIn(b'Welcome test!', response.data)
         self.assertTrue(re.search("Welcome test!", response.get_data(as_text=True)))
 
