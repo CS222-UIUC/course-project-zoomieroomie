@@ -1,56 +1,69 @@
+'''The Person Class'''
+
 import math
 
 class Person:
-    def __init__(self, name, age, major, place_preference, time):
+    '''Simple implementation of the class'''
+    def __init__(self, name, age, major, place, time):
         self.name = name
         self.age = age
         self.major = major #Major in UIUC, Need to find a way to translate into different score
-        self.place_preference = place_preference #North, south, etc., Need to find a way to translate into different score
+        self.place = place #North, etc., Need to turn into different score
         self.time = time #Most active, Need to find a way to translate into different score
 
     def get_name(self):
+        '''Getter for name'''
         return self.name
 
     def get_age(self):
+        '''Getter for age'''
         return self.age
 
     def get_major(self):
+        '''Getter for major'''
         return self.major
 
-    def get_place_preference(self):
-        return self.place_preference
+    def get_place(self):
+        '''Getter for place'''
+        return self.place
 
     def get_time(self):
+        '''Getter for time'''
         return self.time
 
-    def set_name(self, n):
-        self.name = n
+    def set_name(self, new_name):
+        '''Setter for name'''
+        self.name = new_name
 
-    def set_age(self, a):
-        self.age = a
+    def set_age(self, new_age):
+        '''Setter for age'''
+        self.age = new_age
 
-    def set_major(self, m):
-        self.major = m
+    def set_major(self, new_major):
+        '''Setter for major'''
+        self.major = new_major
 
-    def set_place_preference(self, p):
-        self.place_preference = p
+    def set_place(self, new_place):
+        '''Setter for place'''
+        self.place = new_place
 
-    def set_time(self, t):
-        self.time = t
+    def set_time(self, new_time):
+        '''Setter for time'''
+        self.time = new_time
 
-    #Euclidean distance
     def distance(self, other_person):
+        '''Euclidean distance'''
         age_diff = abs(self.age - other_person.get_age())
         #Need better classification instead of 0 and 1
         major_diff = 0 if self.major == other_person.get_major() else 1
-        place_diff = 0 if self.place_preference == other_person.get_place_preference() else 1
+        place_diff = 0 if self.place == other_person.get_place() else 1
         time_diff = 0 if self.time == other_person.get_time() else 1
         #Actual formula
         distance = math.sqrt(age_diff ** 2 + major_diff ** 2 + place_diff ** 2 + time_diff ** 2)
         return distance
     
-    #Find best possible roomate given the array of all person
     def find_best(self, person_array):
+        '''Find best possible roomate given the array of all person'''
         best_person = None
         best_distance = float('inf')
         for person in person_array:
@@ -62,4 +75,3 @@ class Person:
                 best_distance = distance
         return best_person
     
-

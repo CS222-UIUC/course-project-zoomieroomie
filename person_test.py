@@ -1,3 +1,4 @@
+'''Testing file for the person class'''
 from person import Person
 
 # create 4 Person instances
@@ -19,4 +20,4 @@ print(f"The distance between {person1.get_name()} and {person4.get_name()} is {d
 
 for p in p_arr:
     best_w_p = p.find_best(p_arr)
-    print("Best roomate for " + p.get_name() + " is " + best_w_p.get_name() + " with a score of " + str(p.distance(best_w_p)))
+    print("Best for "+p.get_name()+" is "+best_w_p.get_name()+" with "+str(p.distance(best_w_p)))
