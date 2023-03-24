@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import logo512 from 'C:\Users\vinee\OneDrive - University of Illinois - Urbana\UIUC\Classes\Second sem freshman\CS 222\ZoomieRoomie\my-app\public\logo512.png';
+
+
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -34,6 +37,8 @@ function LoginPage() {
 
 
   return (
+    <div>
+    <img src="./logo512.png" alt="Logo" />
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username:</label>
@@ -55,7 +60,9 @@ function LoginPage() {
       </div>
       <button type="submit">Login</button>
     </form>
+    </div>
   );
 }
+
 
 export default LoginPage;
