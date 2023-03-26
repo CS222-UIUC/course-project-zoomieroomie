@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Login from './components/Login';
+import MainPage from './components/MainPage';
+import Profile from './components/Profile';
 
 function App() {
   return (
