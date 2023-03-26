@@ -1,0 +1,16 @@
+{
+  "name": "course-project-zoomieroomie",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000c\u0000o\u0000u\u0000r\u0000s\u0000e\u0000-\u0000p\u0000r\u0000o\u0000j\u0000e\u0000c\u0000t\u0000-\u0000z\u0000o\u0000o\u0000m\u0000i\u0000e\u0000r\u0000o\u0000o\u0000m\u0000i\u0000e\u0000\r\u0000 \u0000",
+  "main": "form_script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.32.2"
+  }
+}

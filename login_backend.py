@@ -1,7 +1,16 @@
 """Login Backend"""
 
 import sqlite3
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import (
+    Flask,
+    render_template,
+    request,
+    session,
+    redirect,
+    url_for,
+    flash,
+    jsonify,
+)
 
 app = Flask(__name__)
 app.secret_key = "secret_key"  # set secret_key
@@ -49,6 +58,18 @@ def logout():
     """Function that logs user out of current session"""
     session.pop("username", None)
     flash("You have been logged out", "success")
+    return redirect(url_for("login"))
+
+
+@app.route("/submit-form", methods=["POST"])
+def submit_form():
+    """Function that received information from form"""
+    if "username" in session:
+        data = request.get_json()
+        response_data = {"status": "success"}
+        flash("We have received your responses", "success")
+        return jsonify(response_data)
+    flash("Please log in to save your responses", "error")
     return redirect(url_for("login"))
 
 
