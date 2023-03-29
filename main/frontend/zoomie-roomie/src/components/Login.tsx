@@ -1,7 +1,7 @@
 // Login.tsx
 
-import React, { useState } from 'react';
-
+import React, { useState, } from 'react';
+import '../css/Login.css';
 
 interface LoginFormData {
     username: string;
@@ -21,6 +21,7 @@ const Login: React.FC = () => {
     try {
         const response = await fetch('http://127.0.0.1:5000/login', {
             method: 'POST',
+            mode: 'cors',
             headers: { 
             'Content-Type': 'application/json',
            },
@@ -40,14 +41,16 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-container">
+      <div className="logo-container">
+        <h1>Zoomie Roomie</h1>
+      </div>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-input">
           <label htmlFor="username">Username:</label>
           <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} />
         </div>
-        <div>
+        <div className="form-input">
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
@@ -56,6 +59,7 @@ const Login: React.FC = () => {
     </div>
   );
 };
+
 
 export default Login;
 

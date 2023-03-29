@@ -11,12 +11,21 @@ from flask import (
 from . import app, db
 from .models import User
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 bcrypt = Bcrypt(app)
 
-@app.route("/")
-def hello_world():
-    return 'Hello, World!'
+#cors = CORS(app, resources={r"*": {"origins": "*", "methods": "*", "allow_headers": "*"}})
+
+'''
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,OPTIONS'
+    return response
+
+app.after_request(add_cors_headers)
+'''
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -32,7 +41,7 @@ def login():
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def register():
     print(request.json)
     data = request.get_json()
@@ -62,3 +71,7 @@ def delete_all_users():
     User.query.delete()
     db.session.commit()
     return "All users have been deleted from the database"
+
+@app.route('/api/test', methods=['GET'])
+def test_route():
+    return jsonify({'message': 'Test route working'})
