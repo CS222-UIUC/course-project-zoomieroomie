@@ -28,7 +28,7 @@ Navigate to the backend directory using the following command:
 
 `cd main/backend`
 
-Change the flask_app variable. This is a one time step:
+Change the flask_app variable. Do this everytime a new terminal is opened.:
 `export FLASK_APP=run.py`
 
 Run the backend server using the following command:
