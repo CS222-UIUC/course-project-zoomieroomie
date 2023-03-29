@@ -1,5 +1,4 @@
 """Login Backend"""
-
 import sqlite3
 from flask import (
     Flask,
@@ -11,35 +10,43 @@ from flask import (
     flash,
     jsonify,
 )
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
+#configuring the app
 app = Flask(__name__)
-app.secret_key = "secret_key"  # set secret_key
+CORS(app, resources={r"/*": {"origins": "http://localhost:3001"}}, methods=["GET", "POST", "OPTIONS"], allow_headers=["Content-Type", "Access-Control-Allow-Origin"])
+#app.secret_key = "secret_key"  # set secret_key
 
+#configuring the database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-@app.route("/", methods=["GET", "POST"])
+#configuring bcrypt (used for encrypting passwords)
+bcrypt = Bcrypt(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):
+        return f'<User {self.username}>'
+
+@app.route("/login", methods=['POST'])
 def login():
     """Function that logs user in if user is in database"""
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
 
-        # check if user exists in database
-        conn = sqlite3.connect("users.sql")
-        cursor = conn.cursor()
-        cursor.execute(
-            """SELECT * FROM users WHERE username=? AND password=?""",
-            (username, password),
-        )
-        user = cursor.fetchone()
-        conn.close()
-
-        if user:
-            # set session variable for current user
-            session["username"] = user[1]
-            flash(f"Welcome {user[1]}!", "success")
-            return redirect(url_for("dashboard"))
-        flash("Invalid username or password", "error")
-    return render_template("login.html")
+    user = User.query.filter_by(username=username).first()
+    if user and bcrypt.check_password_hash(user.password, password):
+        return jsonify({'message': 'Login successful!'}), 200
+    else:
+        return jsonify({'message': 'Invalid username or password'}), 401
 
 
 @app.route("/dashboard")
@@ -74,4 +81,5 @@ def submit_form():
 
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)
