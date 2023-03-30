@@ -57,6 +57,31 @@ def register():
         db.session.commit()
     return jsonify({'message': 'User created successfully!'})
 
+@app.route('/submit-form', methods=['POST'])
+def submit_form():
+    """Function that received information from form"""
+    if "username" in session:
+        data = request.get_json()
+
+        with app.app_context():
+            preferences = Preferences(l_smoker=data.get('l-smoker'), smoke=data.get('smoke'), l-drinker=data.get('l-drinker'), drink=data.get('drink'), extrovert=data.get('extrovert'), l_extrovert=data.get('l-extrovert'), l_sexuality=data.get('l-sexuality'), sexuality=data.get('sexuality'), l_gender=data.get('l-gender'), gender=data.get('gender'))
+            db.session.add(preferences)
+            db.session.commit()
+
+        response_data = {"status": "success"}
+        flash("We have received your responses", "success")
+        return jsonify(response_data)
+    flash("Please log in to save your responses", "error")
+    return redirect(url_for("login"))
+
+@app.route('/preferences', methods=['GET'])
+def get_preferences():
+    preferences = Preferences.query.all()
+    p_list = []
+    for preference in preferences:
+        p_list.append({'preference': preferences})
+    return jsonify({'preferences': p_list})
+
 @app.route('/users', methods=['GET'])
 def get_users():
     users = User.query.all()
