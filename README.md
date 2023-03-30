@@ -8,7 +8,7 @@
 ### 1. Open a terminal and navigate to the project directory.
 ### 2. Create a virtual environment by running the following command:
 
-  `python -m venv env`
+  `python -m venv venv`
 
   This will create a new directory called venv which contains the Python virtual environment.
 
@@ -16,7 +16,7 @@
   `source venv/bin/activate`
   
   Or on Windows:
-`env\Scripts\activate.bat`
+`venv\Scripts\activate.bat`
 
 ### 3. Install Dependencies
 Install the dependencies required for the project using the requirements.txt file using the following command:
