@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="form_style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Habits and Preferences</h1>
+      <h4>Please answer honestly, as potential roommate matches will be more accurate.</h4>
+      <form id="habits-form">
+        <script>
+            function question(x, y, z) {
+                this.label = x;
+                this.question = y;
+                this.options = z;
+            }
+
+            const questions = [
+                new question("l-smoker", "I am willing to live with a smoker:", ["yes", "no", "maybe"]),
+                new question("smoke", "I smoke:", ["often", "sometimes", "never"]),
+                new question("l-drinker", "I am willing to live with someone who drinks:", ["yes", "no", "maybe"]),
+                new question("drink", "I drink:", ["often", "sometimes", "never"]),
+                new question("extrovert", "On a scale of 1 (extremely introverted) to 5 (extremely extroverted), I describe myself as:", ["1", "2", "3", "4", "5"]),
+                new question("l-extrovert", "On a scale of 1 (extremely introverted) to 5 (extremely extroverted), I get along best with people who are:", ["1", "2", "3", "4", "5"]),
+                //ADD NEW QUESTIONS HERE
+                //new question("", "", ["1", "2", "3", "4", "5"]),
+                //new question("", "", ["1", "2", "3", "4", "5"]),
+                //new question("", "", ["1", "2", "3", "4", "5"]),
+                new question("l-sexuality", "I am comfortable living with someone who has a different sexual orientation than me:", ["yes", "no"]),
+                new question("sexuality", "My sexual orientation:", ["straight", "gay", "bisexual", "other", "prefer not to say"]),
+                new question("l-gender", "I am comfortable living with someone of a different gender identity than me:", ["yes", "no"]),
+                new question("gender", "My gender identity:", ["cisgender", "transgender", "other", "prefer not to say"]),
+            ]
+
+            var form = document.getElementById("habits-form");
+
+            for (var i = 0; i < questions.length; i++) {
+                var curr = questions[i];
+
+                var div = document.createElement("div");
+
+                var label = document.createElement("label");
+                label.textContent = curr.question;
+                label.setAttribute("for", curr.label);
+
+                div.appendChild(label);
+
+                for (var j = 0; j < curr.options.length; j++) {
+                    var radioButton = document.createElement("input");
+                    radioButton.type = "radio";
+                    radioButton.name = curr.label;
+                    radioButton.value = curr.options[j];
+                    radioButton.id = curr.label + curr.options[j];
+
+                    var radioLabel = document.createElement("label");
+                    radioLabel.textContent = curr.options[j];
+                    radioLabel.setAttribute("for", curr.label + curr.options[j]);
+
+                    div.appendChild(radioButton);
+                    div.appendChild(radioLabel);
+                    div.appendChild(document.createElement("br"));
+                }
+                form.appendChild(div);
+            }
+        </script>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+    <script src="form_script.js"></script>
+  </body>
+</html>
