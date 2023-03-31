@@ -4,7 +4,7 @@ import tempfile
 import os
 import sqlite3
 import re
-from login_backend import app
+from views import app
 
 
 class FlaskTestCase(unittest.TestCase):

@@ -9,7 +9,7 @@ from flask import (
     make_response,
 )
 from . import app, db
-from .models import User
+from .models import User, Preferences
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 
@@ -47,12 +47,14 @@ def register():
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
+    firstname = data.get('firstname')
+    lastname = data.get('lastname')
     password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
 
 
     with app.app_context():
         db.create_all()
-        user = User(username=username, password=password_hash)
+        user = User(username=username, password=password_hash, firstname=firstname, lastname=lastname)
         db.session.add(user)
         db.session.commit()
     return jsonify({'message': 'User created successfully!'})
@@ -62,9 +64,10 @@ def submit_form():
     """Function that received information from form"""
     if "username" in session:
         data = request.get_json()
+        l_smoker = data.get('l-smoker')
 
         with app.app_context():
-            preferences = Preferences(l_smoker=data.get('l-smoker'), smoke=data.get('smoke'), l-drinker=data.get('l-drinker'), drink=data.get('drink'), extrovert=data.get('extrovert'), l_extrovert=data.get('l-extrovert'), l_sexuality=data.get('l-sexuality'), sexuality=data.get('sexuality'), l_gender=data.get('l-gender'), gender=data.get('gender'))
+            preferences = Preferences(l_smoker=l_smoker)
             db.session.add(preferences)
             db.session.commit()
 
@@ -79,7 +82,7 @@ def get_preferences():
     preferences = Preferences.query.all()
     p_list = []
     for preference in preferences:
-        p_list.append({'preference': preferences})
+        p_list.append({'user': preference.user})
     return jsonify({'preferences': p_list})
 
 @app.route('/users', methods=['GET'])

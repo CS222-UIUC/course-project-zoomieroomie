@@ -28,7 +28,7 @@ class User(db.Model):
 class Preferences(db.Model):
     __tablename__ == 'preferences'
     id = db.Column(db.Integer, primary_key=True, ForeignKey('users.id'))
-    l_smoker = db.Column(db.String(50))
+    l-smoker = db.Column(db.String(50))
     smoke = db.Column(db.String(50))
     l-drinker = db.Column(db.String(50))
     drink = db.Column(db.String(50))

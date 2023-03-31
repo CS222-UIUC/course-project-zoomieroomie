@@ -3,12 +3,14 @@
 import React, { useState } from 'react';
 
 interface RegisterFormData {
-  username: string;
+  email: string;
   password: string;
+  firstname: string;
+  lastname: string;
 }
 
 const Register: React.FC = () => {
-  const [formData, setFormData] = useState<RegisterFormData>({ username: '', password: '' });
+  const [formData, setFormData] = useState<RegisterFormData>({ email: '', password: '', firstname: '', lastname:'' });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -40,12 +42,20 @@ const Register: React.FC = () => {
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} />
+          <label htmlFor="email">Email:</label>
+          <input type="text" id="email" name="email" value={formData.email} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="firstname">First Name:</label>
+          <input type="text" id="firstname" name="firstname" value={formData.firstname} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="lastname">Last Name:</label>
+          <input type="text" id="lastname" name="lastname" value={formData.lastname} onChange={handleChange} />
         </div>
         <button type="submit">Register</button>
       </form>

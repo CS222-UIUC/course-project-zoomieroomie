@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 interface User {
   username: string;
   password: string;
+  firstname: string;
+  lastname: string;
 }
 
 const Users: React.FC = () => {
@@ -42,6 +44,8 @@ const Users: React.FC = () => {
             <li key={user.username}>
               <p>Username: {user.username}</p>
               <p>Password: {user.password}</p>
+              <p>First Name: {user.firstname}</p>
+              <p>Last Name: {user.lastname}</p>
             </li>
           ))}
         </ul>
