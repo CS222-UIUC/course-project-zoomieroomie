@@ -14,27 +14,45 @@ from person import Person
 # Place: very important North quad = 500, Main quad = 300, South quad = 100
 # Active time: (Morning = 10, Noon = 20, Afternoon = 30, Evening = 40, Midnight = 50)
 
+def process_csv(csv_line, num):
+    '''Analyze the line and give an array'''
+    # extract the first x items of the line into a list
+    # arr1: account info, arr2: self info, arr3: prefered roommate info
+    arr1 = csv_line.split(", ")[:num]
+    # initialize two empty lists for the remaining items
+    arr2 = []
+    arr3 = []
+
+    # iterate through the remaining items and distribute them alternately
+    for i, item in enumerate(csv_line.split(", ")[num:]):
+        if i % 2 == 1:
+            arr2.append(item)
+        else:
+            arr3.append(item)
+
+    return arr1, arr2, arr3
+
 print("START OF THE TRIAL!!!")
-arr1 = ["John", 20, "Science", "North quad", "Evening"]
-arr1rm = [18, "Science", "North quad", "Evening"]
+CVS1 = "John, 20, gmail, joemama10, yes, often, yes, sometimes, 3, 3, yes, straight, no, cisgender"
+CVS2 = "Jane, 18, uiuc, minecraft, no, sometimes, maybe, sometimes, 2, 5, no, gay, yes, transgender"
+CVS3 = "Pete, 24, gmail, northern, no, never, maybe, sometimes, 5, 1, no, bisexual, no, other"
+CVS4 = "Abby, 22, uiuc, 123456789, no, never, yes, sometimes, 4, 3, yes, other, yes, other"
 
-arr2 = ["Jane", 18, "Entertainment", "South quad", "Morning"]
-arr2rm = [20, "Entertainment", "South quad", "Evening"]
+info1, self1, rm1 = process_csv(CVS1, 4)
+person1 = Person(info1, self1, rm1)
 
-arr3 = ["Pete", 24, "Economic", "North quad", "Evening"]
-arr3rm = [22, "Science", "North quad", "Afternoon"]
+info2, self2, rm2 = process_csv(CVS2, 4)
+person2 = Person(info2, self2, rm2)
 
-arr4 = ["Abby", 22, "Science", "Main quad", "Noon"]
-arr4rm = [18, "Entertainment", "North quad", "Midnight"]
+info3, self3, rm3 = process_csv(CVS3, 4)
+person3 = Person(info3, self3, rm3)
 
-person1 = Person(arr1, arr1rm)
-person2 = Person(arr2, arr2rm)
-person3 = Person(arr3, arr3rm)
-person4 = Person(arr4, arr4rm)
+info4, self4, rm4 = process_csv(CVS4, 4)
+person4 = Person(info4, self4, rm4)
+
 p_arr = [person1, person2, person3, person4]
 
 # use the calculate_distance method to calculate the distance between the two people
-person1.set_time("Morning")
 distance = person1.distance(person4)
 print(f"The distance between {person1.get_name()} and {person4.get_name()} is {distance:.2f}.")
 
