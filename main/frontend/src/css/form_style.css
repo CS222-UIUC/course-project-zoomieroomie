@@ -8,10 +8,15 @@ body {
   padding: 0;
 }
 
-.container {
+.pref-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 h1 {
@@ -19,7 +24,7 @@ h1 {
   margin-bottom: 30px;
 }
 
-.form-group {
+form {
   margin-bottom: 20px;
 }
 
