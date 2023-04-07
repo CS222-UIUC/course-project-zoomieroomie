@@ -1,36 +1,19 @@
-const form = document.querySelector('form');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const messageInput = document.getElementById('message');
+var form = document.querySelector('form');
 
 form.addEventListener('submit', function(event) {
   event.preventDefault();
+  
+  var formData = new FormData(form);
 
-  // Validate name
-  if (!nameInput.value) {
-    alert('Please enter your name.');
-    return;
+  var output = "";
+  var data = {}
+  for (const [name, value] of formData.entries()) {
+    output += `${name}: ${value}\n`;
+    data[name] = value;
   }
+  document.getElementById("resultArea").value = output;
 
-  // Validate email
-  if (!emailInput.value || !emailInput.value.includes('@')) {
-    alert('Please enter a valid email address.');
-    return;
-  }
-
-  // Validate message
-  if (!messageInput.value) {
-    alert('Please enter a message.');
-    return;
-  }
-
-  // Submit data to server
-  const data = {
-    name: nameInput.value,
-    email: emailInput.value,
-    message: messageInput.value,
-  };
-
+  console.log(data);
   (async () => {
     try {
       const response = await fetch('/submit-form', {

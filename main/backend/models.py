@@ -38,16 +38,16 @@ class Preferences(db.Model):
 
     __tablename__ = "preferences"
     id = db.Column(db.Integer, ForeignKey("users.id"), primary_key=True)
-    l_smoker = db.Column(db.String(50))
-    smoke = db.Column(db.String(50))
-    l_drinker = db.Column(db.String(50))
-    drink = db.Column(db.String(50))
-    extrovert = db.Column(db.Integer)
-    l_extrovert = db.Column(db.Integer)
-    l_sexuality = db.Column(db.String(50))
-    sexuality = db.Column(db.String(50))
-    l_gender = db.Column(db.String(50))
-    gender = db.Column(db.String(50))
+    l_smoke = db.Column(db.Integer())
+    smoke = db.Column(db.Integer())
+    l_drink = db.Column(db.Integer())
+    drink = db.Column(db.Integer())
+    extrovert = db.Column(db.Integer())
+    l_extrovert = db.Column(db.Integer())
+    l_sexuality = db.Column(db.Integer())
+    sexuality = db.Column(db.Integer())
+    l_gender = db.Column(db.Integer())
+    gender = db.Column(db.Integer())
     user = relationship("User", backref="preference")
 
     def __repr__(self):
