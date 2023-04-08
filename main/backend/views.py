@@ -8,14 +8,21 @@ from flask import (
     jsonify,
 )
 import bcrypt
+import sqlalchemy as db
+
 from . import app, db
 from .models import User, Preferences
 
 # from flask_cors import CORS
 
 salt = bcrypt.gensalt()
+engine = db.create_engine("sqlite:///database.sqlite")
+metadata = db.MetaData()
+connection = engine.connect()
 
-# cors = CORS(app, resources={r"*": {"origins": "*", "methods": "*", "allow_headers": "*"}})
+# cors = CORS(
+#     app, resources={r"*": {"origins": "*", "methods": "*", "allow_headers": "*"}}
+# )
 
 """
 def add_cors_headers(response):
@@ -71,14 +78,24 @@ def submit_form():
     """Function that receives information from form"""
     if "username" in session:
         data = request.get_json()
-        l_smoker = data.get("l-smoker")
 
         with app.app_context():
-            preferences = Preferences(l_smoker=l_smoker)
-            db.session.add(preferences)
+            pref = Preferences()
+            pref.l_smoke = data["l-smoke"]
+            pref.smoke = data["smoke"]
+            pref.l_drink = data["l-drink"]
+            pref.drink = data["drink"]
+            pref.extrovert = data["extrovert"]
+            pref.l_extrovert = data["l-extrovert"]
+            pref.l_sexuality = data["l-sexuality"]
+            pref.sexuality = data["sexuality"]
+            pref.l_gender = data["l-gender"]
+            pref.gender = data["gender"]
+
+            db.session.add(pref)
             db.session.commit()
 
-        response_data = {"status": "success"}
+        response_data = {"success": True}
         flash("We have received your responses", "success")
         return jsonify(response_data)
     flash("Please log in to save your responses", "error")
