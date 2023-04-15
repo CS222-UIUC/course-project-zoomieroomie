@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -17,11 +17,13 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  background-color: #8fc9f7;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 30px;
+  font-size: 40px;
 }
 
 form {
@@ -31,6 +33,12 @@ form {
 label {
   display: block;
   margin-bottom: 5px;
+}
+
+label[id="resultArea"] {
+  vertical-align: middle;
+  font-size: 30px;
+  margin-bottom: 0px;
 }
 
 input,
@@ -45,7 +53,6 @@ input[type="radio"] {
   display: none;
 }
 
-/* Style the radio buttons */
 input[type="radio"] + label:before {
   content: '';
   display: inline-block;
@@ -58,14 +65,13 @@ input[type="radio"] + label:before {
   background-color: white;
 }
 
-/* Style the radio buttons when they're selected */
 input[type="radio"]:checked + label:before {
-  background-color: #2196F3;
-  border-color: #2196F3;
+  background-color: #fa8500;
+  border-color: #fa8500;
 }
 
 button[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #fa8500;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -75,5 +81,5 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #d27000;
 }

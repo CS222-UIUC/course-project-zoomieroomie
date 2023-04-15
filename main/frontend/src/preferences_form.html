@@ -4,7 +4,7 @@
     <title>Habits and Preferences</title>
     <link rel="stylesheet" href="css/form_style.css">
   </head>
-  <body>
+  <body style="background-image: url('i-logo.jpg'); background-size: cover;">
     <div class="pref-container">
       <h1>Habits and Preferences</h1>
       <h4>Please answer honestly, as potential roommate matches will be more accurate.</h4>
@@ -21,12 +21,18 @@
                 new question("smoke", "I smoke:", ["often", "sometimes", "never"]),
                 new question("l-drink", "I am willing to live with someone who drinks:", ["yes", "no", "maybe"]),
                 new question("drink", "I drink:", ["often", "sometimes", "never"]),
-                new question("extrovert", "On a scale of 1 (extremely introverted) to 5 (extremely extroverted), I describe myself as:", ["1", "2", "3", "4", "5"]),
-                new question("l-extrovert", "On a scale of 1 (extremely introverted) to 5 (extremely extroverted), I get along best with people who are:", ["1", "2", "3", "4", "5"]),
+                new question("extrovert", "On a scale of 1 to 5, I describe myself as:", ["1 (extremely introverted)", "2", "3", "4", "5 (extremely extroverted)"]),
+                new question("l-extrovert", "On a scale of 1 to 5, I get along best with people who are:", ["1 (extremely introverted)", "2", "3 (no difference)", "4", "5 (extremely extroverted)"]),
                 //ADD NEW QUESTIONS HERE
+                //FORMAT: new question("label", "question", ["1", "2", "3", "4", "5"]),
                 //new question("", "", ["1", "2", "3", "4", "5"]),
-                //new question("", "", ["1", "2", "3", "4", "5"]),
-                //new question("", "", ["1", "2", "3", "4", "5"]),
+                new question("study", "On a scale of 1 to 5, I prefer an in-room study environment that is:", ["1 (completely quiet)", "2", "3 (no difference)", "4", "5 (never quiet -- i.e. friends in room, music playing, etc.)"]),
+                new question("sleep", "On a scale of 1 to 5, I prefer a sleep environment that:", ["1 (is completely quiet)", "2", "3 (no difference)", "4", "5 (has some noise)"]),
+                new question("bedtime-school", "On a school night, I typically go to bed:", ["before 10pm", "10-11pm", "11am-12am", "12pm-1am", "1-2am", "after 2am"]),
+                new question("bedtime-weekend", "On the weekends, I typically go to bed:", ["before 10pm", "10-11pm", "11am-12am", "12pm-1am", "1-2am", "after 2am"]),
+                new question("messy", "On a scale of 1 to 5, I describe my neatness level as:", ["1 (extremely clean)", "2", "3", "4", "5 (extremely messy)"]),
+                new question("l-messy", "On a scale of 1 to 5, I prefer to live with someone whose neatness level is:", ["1 (extremely clean)", "2", "3 (no difference)", "4", "5 (extremely messy)"]),
+                new question("guests", "On a scale of 1 to 5, I am comfortable with guests in the room:", ["1 (never)", "2", "3", "4", "5 (all the time)"]),
                 new question("l-sexuality", "I am comfortable living with someone who has a different sexual orientation than me:", ["yes", "no"]),
                 new question("sexuality", "My sexual orientation:", ["straight", "gay", "bisexual", "other", "prefer not to say"]),
                 new question("l-gender", "I am comfortable living with someone of a different gender identity than me:", ["yes", "no"]),
@@ -50,7 +56,7 @@
                 for (var j = 0; j < curr.options.length; j++) {
                     var radioButton = document.createElement("input");
                     radioButton.type = "radio";
-                    radioButton.required = "required";
+                    //radioButton.required = "required";
                     radioButton.name = curr.label;
                     radioButton.value = j+1;
                     radioButton.id = curr.label + curr.options[j];
@@ -74,7 +80,7 @@
         <button type="submit" class="btn">Submit</button>
       </form>
       <div>
-        <textarea id="resultArea" style="width:98%;height:7em"></textarea>
+        <label id="resultArea" style="width:98%;height:7em"></label>
       </div>
     </div>
     <script src="form_script.js"></script>
