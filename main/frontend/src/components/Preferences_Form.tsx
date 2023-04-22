@@ -117,4 +117,3 @@ const Pref: React.FC = () => {
 
 
 export default Pref;
-
