@@ -9,9 +9,16 @@ from flask import (
 )
 import bcrypt
 import sqlalchemy as db
+# import sys
+# print(sys.path)
+import os
+print(os.getcwd())
 
-from . import app, db
+
+
+from backend.__init__ import app, db
 from .models import User, Preferences
+from .person import Person
 
 # from flask_cors import CORS
 
@@ -34,27 +41,27 @@ def add_cors_headers(response):
 app.after_request(add_cors_headers)
 """
 
+person_dict = {}
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["POST"], endpoint="login")
 def login():
     """Function that logs user in if user is in database"""
     data = request.get_json()
-    username = data.get("username")
+    email = data.get("email")
     password = data.get("password")
 
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(email=email).first()
     if user and user.check_password(password):
-        session["username"] = username
+        session["email"] = email
         return jsonify({"message": "Login successful!"}), 200
-    return jsonify({"message": "Invalid username or password"}), 401
+    return jsonify({"message": "Invalid email or password"}), 401
 
 
-@app.route("/register", methods=["GET", "POST", "PUT", "DELETE"])
+@app.route("/register", methods=["GET", "POST", "PUT", "DELETE"], endpoint="register")
 def register():
     """Function that registers nnew user into database"""
-    print(request.json)
     data = request.get_json()
-    username = data.get("username")
+    email = data.get("email")
     password = data.get("password")
     firstname = data.get("firstname")
     lastname = data.get("lastname")
@@ -63,20 +70,36 @@ def register():
     with app.app_context():
         db.create_all()
         user = User(
-            username=username,
+            email=email,
             password=password_hash,
             firstname=firstname,
             lastname=lastname,
         )
         db.session.add(user)
         db.session.commit()
+
+    person = Person([email, password, firstname, lastname], [""], [""])
+    person_dict[email] = person
     return jsonify({"message": "User created successfully!"})
 
 
-@app.route("/submit-form", methods=["POST"])
+@app.route("/matches", methods=["GET"], endpoint="matches")
+def matches():
+    if "email" in session:
+        email = session["email"]
+        person = person_dict[email]
+        best_roommate = person.find_best(person_dict.values())
+        flash("Best roommate found")
+        return render_template("matches.html", best_roommate=best_roommate)
+        
+    flash("Please log in to see your roommate matches", "error")
+    return redirect(url_for("login"))
+
+
+@app.route("/submit-form", methods=["POST"], endpoint="submit")
 def submit_form():
     """Function that receives information from form"""
-    if "username" in session:
+    if "email" in session:
         data = request.get_json()
 
         with app.app_context():
@@ -109,7 +132,7 @@ def submit_form():
     return redirect(url_for("login"))
 
 
-@app.route("/preferences", methods=["GET"])
+@app.route("/preferences", methods=["GET"], endpoint="preferences")
 def get_preferences():
     """Function that returns list of all users that have inputted preferences"""
     preferences = Preferences.query.all()
@@ -119,18 +142,18 @@ def get_preferences():
     return jsonify({"preferences": p_list})
 
 
-@app.route("/users", methods=["GET"])
+@app.route("/users", methods=["GET"], endpoint="users")
 def get_users():
     """Function that returns all current users in database"""
     users = User.query.all()
     user_list = []
     for user in users:
-        user_list.append({"username": user.username})
+        user_list.append({"email": user.email})
     return jsonify({"users": user_list})
 
 
 ## DELETES ALL USERS FROM DATABASE!! DO NOT RUN!!(testing purposes only)
-@app.route("/delete_all_users")
+@app.route("/delete_all_users", endpoint="delete")
 def delete_all_users():
     """Function that deletes all users from database"""
     User.query.delete()
@@ -138,7 +161,7 @@ def delete_all_users():
     return "All users have been deleted from the database"
 
 
-@app.route("/api/test", methods=["GET"])
+@app.route("/api/test", methods=["GET"], endpoint="test")
 def test_route():
     """Test functionality"""
     return jsonify({"message": "Test route working"})

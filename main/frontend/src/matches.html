@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Roommate Matches</title>
+  </head>
+  <body>
+    <h1>Your Best Roommate:</h1>
+    <div id="match">test</div>
+    <script>
+        console.log("inside the script");
+        var div = document.getElementById("match");
+        if (best_roommate) {
+            console.log("match found");
+            var name_label = document.createElement("label");
+            name_label.textContent = "Name: " + best_roommate.first;
+            var email_label = document.createElement("label");
+            email_label.textContent = "Email: " + best_roommate.email;
+            div.appendChild(nwellweame_label);
+            div.appendChild(email_label);
+        } else {
+            console.log("no match");
+            var label = document.createElement("label");
+            label.textContent = "No matches found.";
+            div.appendChild(label);
+        }
+    </script>
+  </body>
+</html>

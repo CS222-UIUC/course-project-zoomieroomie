@@ -21,8 +21,9 @@ form.addEventListener('submit', function(event) {
 
     (async () => {
       try {
-        const response = await fetch('/submit-form', {
+        const response = await fetch('http://127.0.0.1:5000/submit-form', {
           method: 'POST',
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
