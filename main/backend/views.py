@@ -6,19 +6,13 @@ from flask import (
     url_for,
     flash,
     jsonify,
+    render_template
 )
 import bcrypt
 import sqlalchemy as db
-# import sys
-# print(sys.path)
-import os
-print(os.getcwd())
-
-
-
 from backend.__init__ import app, db
-from .models import User, Preferences
 from .person import Person
+from .models import User, Preferences
 
 # from flask_cors import CORS
 
@@ -42,6 +36,7 @@ app.after_request(add_cors_headers)
 """
 
 person_dict = {}
+
 
 @app.route("/login", methods=["POST"], endpoint="login")
 def login():
@@ -85,13 +80,14 @@ def register():
 
 @app.route("/matches", methods=["GET"], endpoint="matches")
 def matches():
+    """Function that finds best roommate to be displayed on matches page"""
     if "email" in session:
         email = session["email"]
         person = person_dict[email]
         best_roommate = person.find_best(person_dict.values())
         flash("Best roommate found")
         return render_template("matches.html", best_roommate=best_roommate)
-        
+
     flash("Please log in to see your roommate matches", "error")
     return redirect(url_for("login"))
 
