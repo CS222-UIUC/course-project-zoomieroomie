@@ -6,7 +6,7 @@ class Person:
     """Simple implementation of the class"""
 
     def __init__(self, arr_acc, arr_self, arr_rm):
-        self.username = arr_acc[0]
+        self.email = arr_acc[0]
         self.password = arr_acc[1]
         self.first = arr_acc[2]
         self.last = arr_acc[3]
@@ -14,9 +14,9 @@ class Person:
         self.ideal_rm = arr_rm
 
     # GETTER
-    def get_username(self):
-        """Getter for username"""
-        return self.username
+    def get_email(self):
+        """Getter for email"""
+        return self.email
 
     def get_first(self):
         """Getter for first name"""
@@ -39,9 +39,9 @@ class Person:
         return self.ideal_rm
 
     # SETTER
-    def set_username(self, new_name):
+    def set_email(self, new_email):
         """Setter for name"""
-        self.username = new_name
+        self.email = new_email
 
     def set_first(self, new_first):
         """Setter for age"""
@@ -108,7 +108,7 @@ class Person:
         best_person = None
         best_distance = float("inf")
         for person in person_array:
-            if person is self:
+            if person.email == self.email:
                 continue
             distance = self.distance(person)
             if distance < best_distance:

@@ -1,7 +1,7 @@
 """Database models for ZoomieRoomie"""
 import bcrypt
-from SQLAlchemy import ForeignKey
-from SQLAlchemy.orm import relationship
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 from . import db
 
 salt = bcrypt.gensalt()
@@ -13,7 +13,7 @@ class User(db.Model):
 
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(319), unique=True, nullable=False)
     password = db.Column(db.String(50), nullable=False)
     firstname = db.Column(db.String(50), nullable=False)
     lastname = db.Column(db.String(50), nullable=False)
@@ -21,7 +21,7 @@ class User(db.Model):
 
     def __repr__(self):
         """Defines string representation"""
-        return f"<User {self.username}>"
+        return f"<User {self.email}>"
 
     def set_password(self, password):
         """Sets user password"""
