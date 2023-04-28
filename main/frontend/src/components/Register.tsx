@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/Register.css";
+import { Link } from "react-router-dom";
 
 interface RegisterFormData {
   firstName: string;
@@ -123,7 +124,9 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">Register
+        <Link to="/Main">Go to the main page</Link>
+        </button>
       </form>
     </div>
   );
