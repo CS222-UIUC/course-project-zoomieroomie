@@ -1,39 +1,15 @@
 """Backend functionality for login, register, form submission"""
-from flask import (
-    request,
-    session,
-    redirect,
-    url_for,
-    flash,
-    jsonify,
-    render_template
-)
+from flask import request, session, redirect, url_for, flash, jsonify, render_template
 import bcrypt
 import sqlalchemy as db
 from backend.__init__ import app, db
 from .person import Person
 from .models import User, Preferences
 
-# from flask_cors import CORS
-
 salt = bcrypt.gensalt()
 engine = db.create_engine("sqlite:///database.sqlite")
 metadata = db.MetaData()
 connection = engine.connect()
-
-# cors = CORS(
-#     app, resources={r"*": {"origins": "*", "methods": "*", "allow_headers": "*"}}
-# )
-
-"""
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
-    response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,OPTIONS'
-    return response
-
-app.after_request(add_cors_headers)
-"""
 
 person_dict = {}
 
