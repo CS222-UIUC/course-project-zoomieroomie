@@ -1,4 +1,6 @@
 var form = document.querySelector('form');
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+const apiUrl = 'http://127.0.0.1:5000/submit-form';
 
 form.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -17,25 +19,23 @@ form.addEventListener('submit', function(event) {
     output = "PLEASE SELECT A RESPONSE FOR ALL QUESTIONS.";
     document.getElementById("resultArea").textContent = output;
   } else {
-    document.getElementById("resultArea").textContent = output;
+    document.getElementById("resultArea").textContent = "We've received your responses!";
 
     (async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/submit-form', {
+        const response = await fetch(proxyUrl + apiUrl, {
           method: 'POST',
-          mode: 'no-cors',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({data: 'example'})
+        })
+        .then(response => {
+          alert("Form submitted successfully");
+        })
+        .catch(error => {
+          alert("error");
         });
-
-        if (response.ok) {
-          alert('Form submitted successfully.');
-          form.reset();
-        } else {
-          alert('1-There was an error submitting the form.');
-        }
       } catch (error) {
         alert('2-There was an error submitting the form.');
       }
