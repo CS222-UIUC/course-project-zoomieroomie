@@ -2,6 +2,7 @@
 
 import React, { useState, } from 'react';
 import '../css/Login.css';
+import { Link } from "react-router-dom";
 
 interface LoginFormData {
     username: string;
@@ -54,7 +55,9 @@ const Login: React.FC = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Login
+        <Link to="/Main">Go to the main page</Link>
+        </button>
       </form>
     </div>
   );
@@ -62,4 +65,3 @@ const Login: React.FC = () => {
 
 
 export default Login;
-
