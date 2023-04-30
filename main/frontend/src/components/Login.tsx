@@ -4,12 +4,12 @@ import React, { useState, } from 'react';
 import '../css/Login.css';
 
 interface LoginFormData {
-    username: string;
+    email: string;
     password: string;
   }
 
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState<LoginFormData>({ username: '', password: '' });
+  const [formData, setFormData] = useState<LoginFormData>({ email: '', password: '' });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -19,7 +19,7 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/login', {
+        const response = await fetch('http://127.0.0.1:5001/login', {
             method: 'POST',
             mode: 'cors',
             headers: { 
@@ -47,8 +47,8 @@ const Login: React.FC = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form-input">
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} />
+          <label htmlFor="username">Email:</label>
+          <input type="text" id="username" name="email" value={formData.email} onChange={handleChange} />
         </div>
         <div className="form-input">
           <label htmlFor="password">Password:</label>
