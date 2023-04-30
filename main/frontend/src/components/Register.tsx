@@ -1,3 +1,5 @@
+//Register.tsx
+
 import React, { useState } from "react";
 import "../css/Register.css";
 import { Link } from "react-router-dom";
@@ -5,7 +7,7 @@ import { Link } from "react-router-dom";
 interface RegisterFormData {
   firstName: string;
   lastName: string;
-  username: string;
+  email: string;
   password: string;
   confirmPassword: string;
 }
@@ -100,7 +102,7 @@ const Register: React.FC = () => {
             type="text"
             id="username"
             name="email"
-            value={formData.username}
+            value={formData.email}
             onChange={handleChange}
           />
         </div>
