@@ -1,52 +1,49 @@
 """Testing file for the person class"""
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+# from sqlalchemy import create_engine
+# from sqlalchemy.orm import sessionmaker
 
-from .models import User, Preferences
-from .person import Person
+# from models import User, Preferences
+from person import Person
 
 # Create 4 Person instances
 # Update: Every person has 3 arrays, arr1 for acc, arr2 for self info, arr3 for ideal roomate.
 
-# When calculating compatability, self's arr2 will be calc w other's arr3, and vice versa.
-# Then, the 2 distance will be average and that is the final score.
+# # create an engine that connects to the database file
+# engine = create_engine("sqlite:///users.db")
 
-# create an engine that connects to the database file
-engine = create_engine("sqlite:///users.db")
+# # create a session factory
+# Session = sessionmaker(bind=engine)
 
-# create a session factory
-Session = sessionmaker(bind=engine)
+# # create a session object
+# session = Session()
 
-# create a session object
-session = Session()
+# # retrieve all users from the database
+# users = session.query(User).all()
 
-# retrieve all users from the database
-users = session.query(User).all()
+# user_data = []
 
-user_data = []
+# for user in users:
+#     # extract the user data into an array
+#     acc_info = [user.username, user.password, user.firstname, user.lastname]
 
-for user in users:
-    # extract the user data into an array
-    acc_info = [user.username, user.password, user.firstname, user.lastname]
+#     # turn the preferences into arrays (one for 'l_', and one for the rest)
+#     rm_arr = [
+#         getattr(user.preferences, col)
+#         for col in Preferences.__table__.columns.keys()
+#         if col.startswith("l_")
+#     ]
+#     self_arr = [
+#         getattr(user.preferences, col)
+#         for col in Preferences.__table__.columns.keys()
+#         if not col.startswith("l_")
+#     ]
 
-    # turn the preferences into arrays (one for 'l_', and one for the rest)
-    rm_arr = [
-        getattr(user.preferences, col)
-        for col in Preferences.__table__.columns.keys()
-        if col.startswith("l_")
-    ]
-    self_arr = [
-        getattr(user.preferences, col)
-        for col in Preferences.__table__.columns.keys()
-        if not col.startswith("l_")
-    ]
+#     person = Person(acc_info, self_arr, rm_arr)
+#     # add the user data and preference data to the nested user array
+#     user_data.append(person)
 
-    person = Person(acc_info, self_arr, rm_arr)
-    # add the user data and preference data to the nested user array
-    user_data.append(person)
-
-# close the session
-session.close()
+# # close the session
+# session.close()
 
 
 def process_csv(csv_line, num):
@@ -61,20 +58,18 @@ def process_csv(csv_line, num):
     # iterate through the remaining items and distribute them alternately
     for i, item in enumerate(csv_line.split(",")[num:]):
         if i % 2 == 1:
-            arr2.append(item)
+            arr2.append(int(item))
         else:
-            arr3.append(item)
+            arr3.append(int(item))
 
     return arr1, arr2, arr3
 
 
-print("START OF THE TRIAL!!!/n")
-CVS1 = (
-    "John12,joemama10,John,Nguyen,yes,often,yes,sometimes,3,3,yes,straight,no,cisgender"
-)
-CVS2 = "Jane23,12345,Jane,Doe,no,sometimes,maybe,sometimes,2,5,no,gay,yes,transgender"
-CVS3 = "Pete234,gjgjgj,Pete,Nguyen,no,never,maybe,sometimes,5,1,no,bisexual,no,other"
-CVS4 = "Abby6969,mommymilker,Abb,Stake,no,never,yes,sometimes,4,3,yes,other,yes,other"
+print("START OF THE TRIAL!!!")
+CVS1 = "John12,ddddd,John,Ngu,1,3,1,2,5,9,4,3,4,4,5,6,7,1,7,5,5,1"
+CVS2 = "Jane23,ccccc,Jane,Doe,4,9,2,6,3,8,2,4,2,8,2,4,3,4,2,1,4,3"
+CVS3 = "Pete23,bbbbb,Pete,Ngu,5,2,3,7,8,6,1,7,1,2,5,2,9,3,4,1,7,2"
+CVS4 = "Abby69,aaaaa,Abby,Sta,7,5,7,2,4,3,5,6,5,1,3,3,1,1,5,3,9,5"
 
 info1, self1, rm1 = process_csv(CVS1, 4)
 person1 = Person(info1, self1, rm1)
