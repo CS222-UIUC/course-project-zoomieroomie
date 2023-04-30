@@ -1,0 +1,30 @@
+/* Main.css */
+.main-container {
+    text-align: center;
+    margin-top: 20vh;
+    background-color: #E84A27; /* Set background color to orange */
+    height: 100vh; /* Set height to cover entire window */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .welcome-heading {
+    font-size: 72px;
+    font-weight: bold;
+    color: navy; /* Set text color to navy blue */
+  }
+  
+  .buttons-container {
+    margin-top: 20px;
+    display: flex; /* Use flexbox to create space between buttons */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Add space between buttons */
+  }
+  
+  .button {
+    margin-top: 10px;
+    font-size: 24px;
+    padding: 10px 20px;
+    max-width: 200px; /* Set maximum width for buttons */
+  }
