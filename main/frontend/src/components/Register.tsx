@@ -41,8 +41,9 @@ const Register: React.FC = () => {
       alert("Please enter a valid @illinois.edu email address.");
       return;
     }
-    const passwordPattern =
-      /^(?=.*[A-Z].*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*])(?=.{10,})/;
+    
+    const passwordPattern = /^(?=.*[A-Z].*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{10,})/;
+
     if (!passwordPattern.test(formData.password)) {
       alert(
         'Please enter a password that is at least 10 characters long and contains at least 2 capital letters, at least 1 number, and at least 1 special character from the list: "!,@,#,$<%,&,*".'

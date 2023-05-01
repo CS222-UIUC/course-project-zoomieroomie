@@ -6,6 +6,7 @@ import Main from './components/Main';
 import Profile from './components/Profile';
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
 import './App.css';
+import Preferences from './components/Preferences';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/main" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+         <Route path="/preferences" element={<Preferences />} />
           <Route path="/*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
