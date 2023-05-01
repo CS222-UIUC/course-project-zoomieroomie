@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 
 interface User {
-  username: string;
+  email: string;
   password: string;
   firstname: string;
   lastname: string;
@@ -15,7 +15,7 @@ const Users: React.FC = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/users', {
+        const response = await fetch('http://127.0.0.1:5001/users', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -41,9 +41,8 @@ const Users: React.FC = () => {
       ) : (
         <ul>
           {users.map((user) => (
-            <li key={user.username}>
-              <p>Username: {user.username}</p>
-              <p>Password: {user.password}</p>
+            <li key={`${user.email}-${user.password}`}>
+              <p>Email: {user.email}</p>
               <p>First Name: {user.firstname}</p>
               <p>Last Name: {user.lastname}</p>
             </li>

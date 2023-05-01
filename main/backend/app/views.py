@@ -1,12 +1,12 @@
 """Backend functionality for login, register, form submission"""
 from flask import request, session, redirect, url_for, flash, jsonify, render_template
-import bcrypt
+#import bcrypt
 import sqlalchemy as db
-from backend.__init__ import app, db
-from .person import Person
+from . import app, db, bcrypt
+from . person import Person
 from .models import User, Preferences
 
-salt = bcrypt.gensalt()
+#salt = bcrypt.gensalt()
 engine = db.create_engine("sqlite:///database.sqlite")
 metadata = db.MetaData()
 connection = engine.connect()
@@ -36,7 +36,7 @@ def register():
     password = data.get("password")
     firstname = data.get("firstname")
     lastname = data.get("lastname")
-    password_hash = bcrypt.hashpw(password, salt)
+    password_hash = bcrypt.generate_password_hash(password)
 
     with app.app_context():
         db.create_all()
@@ -120,7 +120,7 @@ def get_users():
     users = User.query.all()
     user_list = []
     for user in users:
-        user_list.append({"email": user.email})
+        user_list.append({"email": user.email, "firstname": user.firstname, "lastname": user.lastname})
     return jsonify({"users": user_list})
 
 

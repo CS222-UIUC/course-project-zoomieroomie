@@ -1,3 +1,5 @@
+//Register.tsx
+
 import React, { useState } from "react";
 import "../css/Register.css";
 import { Link } from "react-router-dom";
@@ -5,7 +7,7 @@ import { Link } from "react-router-dom";
 interface RegisterFormData {
   firstName: string;
   lastName: string;
-  username: string;
+  email: string;
   password: string;
   confirmPassword: string;
 }
@@ -14,7 +16,7 @@ const Register: React.FC = () => {
   const [formData, setFormData] = useState<RegisterFormData>({
     firstName: "",
     lastName: "",
-    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -35,12 +37,13 @@ const Register: React.FC = () => {
       return;
     }
     const emailPattern = /^[^\s@]+@illinois\.edu$/;
-    if (!emailPattern.test(formData.username)) {
+    if (!emailPattern.test(formData.email)) {
       alert("Please enter a valid @illinois.edu email address.");
       return;
     }
-    const passwordPattern =
-      /^(?=.*[A-Z].*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*])(?=.{10,})/;
+    
+    const passwordPattern = /^(?=.*[A-Z].*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{10,})/;
+
     if (!passwordPattern.test(formData.password)) {
       alert(
         'Please enter a password that is at least 10 characters long and contains at least 2 capital letters, at least 1 number, and at least 1 special character from the list: "!,@,#,$<%,&,*".'
@@ -53,9 +56,9 @@ const Register: React.FC = () => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/register", {
-        method: "POST",
-        mode: "cors",
+      const response = await fetch('http://127.0.0.1:5001/register', {
+        method: 'POST',
+        mode: 'cors',
         headers: {
           "Content-Type": "application/json",
         },
@@ -95,12 +98,12 @@ const Register: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="text"
             id="username"
-            name="username"
-            value={formData.username}
+            name="email"
+            value={formData.email}
             onChange={handleChange}
           />
         </div>

@@ -17,11 +17,11 @@ const Main = () => {
           className="button"
           onClick={() => alert("Create Your Profile clicked")}
         >
-          <Link to="/Profile">Go back to the Profile Page</Link>
+          <Link to="/Profile"></Link>
           Create Your Profile
         </button>
         <button className="button" onClick={() => alert("Sign Out clicked")}>
-          <Link to="/Login">Go back to the Login Page</Link>
+          <Link to="/Login"></Link>
           Sign Out
         </button>
       </div>

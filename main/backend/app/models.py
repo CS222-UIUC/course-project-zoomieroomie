@@ -1,10 +1,10 @@
 """Database models for ZoomieRoomie"""
-import bcrypt
+#import bcrypt
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
-from . import db
+from . import db, bcrypt
 
-salt = bcrypt.gensalt()
+#salt = bcrypt.gensalt()
 # bcrypt = Bcrypt(app)
 
 
@@ -17,22 +17,16 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable=False)
     firstname = db.Column(db.String(50), nullable=False)
     lastname = db.Column(db.String(50), nullable=False)
-    preferences = relationship("Preferences", uselist=False, backref="user")
+    preferences = relationship("Preferences", uselist=False, backref="users")
 
     def __repr__(self):
         """Defines string representation"""
         return f"<User {self.email}>"
 
-    def set_password(self, password):
-        """Sets user password"""
-        self.password = bcrypt.hashpw(password, salt)
-
-    def check_password(self, password):
+    def check_password(self, plain_text_password):
         """Compares password with hash"""
-        hash_p = bcrypt.hashpw(password, salt)
-        return hash_p == self.password
-
-
+        hash_p = self.password.decode('utf-8')
+        return bcrypt.check_password_hash(hash_p, plain_text_password)
 class Preferences(db.Model):
     """Preferences table in database (one-to-one with Users)"""
 
