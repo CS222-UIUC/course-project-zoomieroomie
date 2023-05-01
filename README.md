@@ -28,17 +28,14 @@ Navigate to the backend directory using the following command:
 
 `cd main/backend`
 
-Change the flask_app variable. Do this everytime a new terminal is opened.:
-`export FLASK_APP=run.py`
-
 Run the backend server using the following command:
 
-`flask run`
+'python3 run.py runserver -d'
 
 ### 5. Start the Frontend Server
 Open a new terminal window and navigate to the frontend/zoomie-roomie directory using the following command:
 
-`cd frontend/zoomie-roomie`
+`cd frontend`
 
 Install the required packages using the following command (this is a one time step):
 `npm install`
