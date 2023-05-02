@@ -41,10 +41,12 @@ const MyForm: React.FC = () => {
 
     let count = 0;
     let data: { [key: string]: any } = {};
-    for (const [name, value] of formData.entries()) {
+    for (const entry of formData.entries()) {
+      const name = entry[0];
+      const value = entry[1];
       count += 1;
       data[name] = value;
-    }
+}
 
     if (count !== 12) {
       alert("PLEASE SELECT A RESPONSE FOR ALL QUESTIONS.");
