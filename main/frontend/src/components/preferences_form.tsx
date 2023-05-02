@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/form_style.css';
 import { Link } from "react-router-dom";
+import MyForm from "./form_script";
 
 interface Question {
   label: string;
