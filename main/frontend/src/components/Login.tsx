@@ -55,8 +55,11 @@ const Login: React.FC = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
-        <button type="submit">Login
-        <Link to="/Main">Go to the main page</Link>
+        <button type="submit">
+        <Link to="/Main">Login</Link>
+        </button>
+        <button type="button">Don't have an account? <br />
+        <Link to="/Register">Register</Link>
         </button>
       </form>
     </div>

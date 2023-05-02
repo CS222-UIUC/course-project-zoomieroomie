@@ -2,27 +2,22 @@ import React from "react";
 import "../css/Main.css"; // Import the Main.css file
 import { Link } from "react-router-dom";
 
-const Main = () => {
+const Main: React.FC = () => {
   return (
     <div className="main-container">
-      <h1 className="welcome-heading">Welcome!</h1>
+      <h1 className="welcome-heading">Welcome to Zoomie Roomie!</h1>
       <div className="buttons-container">
-        <button
-          className="button"
-          onClick={() => alert("View Your Matches clicked")}
-        >
-          View Your Matches
+        <button type="submit">
+         
+          <Link to="/matches">View Your Matches</Link>
         </button>
-        <button
-          className="button"
-          onClick={() => alert("Create Your Profile clicked")}
-        >
-          <Link to="/Profile"></Link>
-          Create Your Profile
+        <button type="submit">
+          
+          <Link to="/preferencesform">Fill out the Preferences Form</Link>
         </button>
-        <button className="button" onClick={() => alert("Sign Out clicked")}>
-          <Link to="/Login"></Link>
-          Sign Out
+        <button type="submit">
+        
+          <Link to="/login">Sign Out</Link>
         </button>
       </div>
     </div>
