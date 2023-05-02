@@ -55,22 +55,26 @@ const Register: React.FC = () => {
       return;
     }
 
-    try {
-      const response = await fetch('http://127.0.0.1:5001/register', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      console.log(response);
-      const data = await response.json();
-      alert(data.message);
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while registering. Please try again later.");
-    }
+    (async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5001/register', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+        .then(response => {
+          alert("Regsitered successfully");
+        })
+        .catch(error => {
+          alert("There was an error creating a user.");
+        });
+      } catch (error) {
+        alert('There was an error creating a user.');
+      }
+    })();
   };
 
   return (
@@ -101,7 +105,7 @@ const Register: React.FC = () => {
           <label htmlFor="email">Email:</label>
           <input
             type="text"
-            id="username"
+            id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
