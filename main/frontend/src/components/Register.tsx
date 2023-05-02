@@ -42,11 +42,11 @@ const Register: React.FC = () => {
       return;
     }
     
-    const passwordPattern = /^(?=.*[A-Z].*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{10,})/;
+    const passwordPattern = /^(?=.*[A-Z].)(?=.*\d)(?=.*[!@#$%^&*])(?=.{7,})/;
 
     if (!passwordPattern.test(formData.password)) {
       alert(
-        'Please enter a password that is at least 10 characters long and contains at least 2 capital letters, at least 1 number, and at least 1 special character from the list: "!,@,#,$<%,&,*".'
+        'Please enter a password that is at least 8 characters long and contains at least 1 capital letter, at least 1 number, and at least 1 special character from the list: "!,@,#,$<%,&,*".'
       );
       return;
     }
@@ -127,8 +127,8 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Register
-        <Link to="/Main">Go to the main page</Link>
+        <button type="submit">
+        <Link to="/Main">Register</Link>
         </button>
       </form>
     </div>

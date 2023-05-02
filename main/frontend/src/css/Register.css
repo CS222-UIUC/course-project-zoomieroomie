@@ -1,33 +1,27 @@
-body {
-    position: relative;
-    font-family: Arial, Helvetica, sans-serif;
+
+  
+  html, body {
+    height: 100%;
   }
   
-  body::after {
-    content: "";
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("alma.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
-    opacity: 0.8; /* set the opacity of the pseudo-element */
-    filter: saturate(150%);
-    z-index: -1; /* push the pseudo-element behind the content */
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .container {
     margin: auto;
+    text-align: center;
     max-width: 500px;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-top: 0.5in;
   }
+  
   
   h1 {
     text-align: center;
