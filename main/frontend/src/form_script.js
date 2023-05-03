@@ -1,6 +1,6 @@
 var form = document.querySelector('form');
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const apiUrl = 'http://127.0.0.1:5000/submit-form';
+const apiUrl = 'http://127.0.0.1:5001/submit-form';
 
 form.addEventListener('submit', function(event) {
   event.preventDefault();
