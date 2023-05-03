@@ -6,40 +6,68 @@ import MyForm from "./form_script";
 interface Question {
   label: string;
   question: string;
-  options: string[];
+  options: { value: string; label: string }[];
 }
 
 const HabitsAndPreferences: React.FC = () => {
   const questions: Question[] = [
     {
       label: 'l-smoke',
-      question: 'I am willing to live with a smoker:',
-      options: ['yes', 'no', 'maybe'],
+      question: 'Live with someone who smokes?:',
+      options: [
+        { value: 'often', label: '1' },
+        { value: 'sometimes', label: '2' },
+        { value: 'never', label: '3' }
+      ],
     },
     {
       label: 'smoke',
       question: 'I smoke:',
-      options: ['often', 'sometimes', 'never'],
+      options: [
+        { value: 'often', label: '1' },
+        { value: 'sometimes', label: '2' },
+        { value: 'never', label: '3' }
+      ],
     },
     {
       label: 'l-drink',
       question: 'I am willing to live with someone who drinks:',
-      options: ['yes', 'no', 'maybe'],
+      options: [
+        { value: 'yes', label: '1' },
+        { value: 'no', label: '2' },
+        { value: 'maybe', label: '3' }
+      ],
     },
     {
       label: 'drink',
       question: 'I drink:',
-      options: ['often', 'sometimes', 'never'],
+      options: [
+        { value: 'often', label: '1' },
+        { value: 'sometimes', label: '2' },
+        { value: 'never', label: '3' }
+      ],
     },
     {
       label: 'extrovert',
       question: 'On a scale of 1 to 5, I describe myself as:',
-      options: ['1 (extremely introverted)', '2', '3', '4', '5 (extremely extroverted)'],
+      options: [
+        { value: 'extremely introverted', label: '1' },
+        { value: 'introverted', label: '2' },
+        { value: 'neutral', label: '3' },
+        { value: 'extroverted', label: '4' },
+        { value: 'extremely extroverted', label: '5' }
+      ],
     },
     {
       label: 'l-extrovert',
       question: 'On a scale of 1 to 5, I get along best with people who are:',
-      options: ['1 (extremely introverted)', '2', '3 (no difference)', '4', '5 (extremely extroverted)'],
+      options: [
+        { value: 'extremely introverted', label: '1' },
+        { value: 'introverted', label: '2' },
+        { value: 'neutral', label: '3' },
+        { value: 'extroverted', label: '4' },
+        { value: 'extremely extroverted', label: '5' }
+      ],
     },
     //ADD NEW QUESTIONS HERE
     //FORMAT: new question("label", "question", ["1", "2", "3", "4", "5"]),
@@ -48,37 +76,67 @@ const HabitsAndPreferences: React.FC = () => {
       label: 'study',
       question: 'On a scale of 1 to 5, I prefer an in-room study environment that is:',
       options: [
-        '1 (completely quiet)',
-        '2',
-        '3 (no difference)',
-        '4',
-        '5 (never quiet -- i.e. friends in room, music playing, etc.)',
+        { value: 'completely quiet', label: '1' },
+        { value: '', label: '2' },
+        { value: 'no difference', label: '3' },
+        { value: '', label: '4' },
+        { value: 'never quiet -- i.e. friends in room, music playing, etc', label: '5' }
       ],
     },
     {
       label: 'sleep',
       question: 'On a scale of 1 to 5, I prefer a sleep environment that:',
-      options: ['1 (is completely quiet)', '2', '3 (no difference)', '4', '5 (has some noise)'],
+      options: [
+        { value: 'completely quiet', label: '1' },
+        { value: '', label: '2' },
+        { value: 'no difference', label: '3' },
+        { value: '', label: '4' },
+        { value: 'never quiet -- i.e. friends in room, music playing, etc', label: '5' }
+      ],
     },
     {
       label: 'bedtime-school',
       question: 'On a school night, I typically go to bed:',
-      options: ['before 10pm', '10-11pm', '11am-12am', '12pm-1am', '1-2am', 'after 2am'],
+      options: [
+        { value: 'before 10pm', label: '1' },
+        { value: '10-11pm', label: '2' },
+        { value: '11pm-12am', label: '3' },
+        { value: '12am-1am', label: '4' },
+        { value: '1am or after', label: '5' }
+      ],
     },
     {
       label: 'bedtime-weekend',
       question: 'On the weekends, I typically go to bed:',
-      options: ['before 10pm', '10-11pm', '11am-12am', '12pm-1am', '1-2am', 'after 2am'],
+      options: [
+        { value: 'before 10pm', label: '1' },
+        { value: '10-11pm', label: '2' },
+        { value: '11pm-12am', label: '3' },
+        { value: '12am-1am', label: '4' },
+        { value: '1am or after', label: '5' }
+      ],
     },
     {
       label: 'messy',
       question: 'On a scale of 1 to 5, I describe my neatness level as:',
-      options: ['1 (extremely clean)', '2', '3', '4', '5 (extremely messy)'],
+      options: [
+        { value: 'extremely clean', label: '1' },
+        { value: '', label: '2' },
+        { value: 'neutral', label: '3' },
+        { value: '', label: '4' },
+        { value: 'extremely messy', label: '5' }
+      ],
     },
     {
       label: 'l-messy',
       question: 'On a scale of 1 to 5, I prefer to live with someone whose neatness level is:',
-      options: ['1 (extremely clean)', '2', '3 (no difference)', '4', '5 (extremely messy)'],
+      options: [
+        { value: 'extremely clean', label: '1' },
+        { value: '', label: '2' },
+        { value: 'neutral', label: '3' },
+        { value: '', label: '4' },
+        { value: 'extremely messy', label: '5' }
+      ],
     },
     ];
     
@@ -96,9 +154,9 @@ const HabitsAndPreferences: React.FC = () => {
     <label htmlFor={question.label}>{question.question}</label>
     <select id={question.label} name={question.label} required>
     {question.options.map((option) => (
-    <option key={option} value={option}>
-    {option}
-    </option>
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
     ))}
     </select>
     </div>
