@@ -89,26 +89,22 @@ const HabitsAndPreferences: React.FC = () => {
     
     return (
     <div className="form-container">
-    <h1>Habits and Preferences</h1>
-    <form onSubmit={handleSubmit}>
-    {questions.map((question) => (
-    <div key={question.label} className="form-group">
-    <label htmlFor={question.label}>{question.question}</label>
-    <select id={question.label} name={question.label} required>
-    {question.options.map((option) => (
-    <option key={option} value={option}>
-    {option}
-    </option>
-    ))}
-    </select>
-    </div>
-    ))}
-    
-    <button type="submit">
-    <Link to="/Main">Submit</Link>
-    </button>
-    
-    </form>
+      <h1>Habits and Preferences</h1>
+      <form onSubmit={handleSubmit}>
+        {questions.map((question) => (
+        <div key={question.label} className="form-group">
+          <label htmlFor={question.label}>{question.question}</label>
+          <select id={question.label} name={question.label} required>
+            {question.options.map((option) => (
+            <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+        ))}
+        
+        <button type="submit">Submit</button>
+      
+      </form>
     </div>
     );
     };

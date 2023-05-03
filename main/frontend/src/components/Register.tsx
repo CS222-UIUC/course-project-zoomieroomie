@@ -21,6 +21,9 @@ const Register: React.FC = () => {
     confirmPassword: "",
   });
 
+  const proxyUrl = 'https://proxy.cors.sh/';
+  const apiUrl = 'http://127.0.0.1:5001/register';
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -57,7 +60,7 @@ const Register: React.FC = () => {
 
     (async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5001/register', {
+        const response = await fetch(proxyUrl + apiUrl, {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -66,13 +69,17 @@ const Register: React.FC = () => {
           body: JSON.stringify(formData),
         })
         .then(response => {
-          alert("Regsitered successfully");
+          // alert(response.ok);
+          // if (response.ok) {
+          //   window.location.href = '/main';
+          // }
+          window.location.href = '/main';
         })
         .catch(error => {
           alert("There was an error creating a user.");
         });
       } catch (error) {
-        alert('There was an error creating a user.');
+        alert('There was an error connecting to the database.');
       }
     })();
   };
@@ -131,9 +138,7 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">
-        <Link to="/Main">Register</Link>
-        </button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
