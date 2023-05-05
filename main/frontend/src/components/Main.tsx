@@ -13,7 +13,7 @@ const Main: React.FC = () => {
         </button>
         <button type="submit">
           
-          <Link to="/preferencesform">Fill out the Preferences Form</Link>
+          <Link to="/form_script">Fill out the Preferences Form</Link>
         </button>
         <button type="submit">
         
