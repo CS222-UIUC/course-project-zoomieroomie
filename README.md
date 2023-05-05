@@ -2,11 +2,11 @@
 
 ## What is Zoomie Roomie?
 
-This website allows UIUC students to find the perfect roommate match instead of having to scroll through many profiles in current roommate pairing applications.
-The website collects their preferences for roommates:
+This website allows UIUC students to find the perfect roommate match instead of having to scroll through many profiles in the current UIUC roommate pairing application.
+The website collects their personal habits along with their preferences for roommates:
 1. Adds them to the database with their user info and preferences
 2. Runs the matching algorithm
-3. And displays the matches on a new page for the user to see
+3. And displays the top roommate matches on a new page for the user to see
 
 For more details, view the full project proposal [here](https://docs.google.com/document/d/1OvPDONpqYjYO0XBzqJc_672ZGQiraiXadDOPLqqPeZI/edit#heading=h.qougbnz1fcec).
 
