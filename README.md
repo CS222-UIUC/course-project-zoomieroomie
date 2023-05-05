@@ -12,7 +12,7 @@ For more details, view the full project proposal [here](https://docs.google.com/
 
 # Technical Architecture
 
-![Zoomie Roomie Technical Architecture](https://user-images.githubusercontent.com/89665603/166554516-cf9de560-f453-44bc-9c2c-648ea701ee01.png)
+![Zoomie Roomie Technical Architecture](TechnicalArchitecture.png)
 
 # Developers
 
