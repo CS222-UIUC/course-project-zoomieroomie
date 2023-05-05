@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import HabitsAndPreferences from "./preferences_form";
 
 interface FormData {
   // Define the type of each form field
@@ -77,7 +76,6 @@ const MyForm: React.FC = () => {
   return (
     <div>
       <h1>Welcome to the Roommate Survey!</h1>
-      <HabitsAndPreferences />
       <form onSubmit={handleSubmit}>
         <div className="form-input">
           <label htmlFor="l-smoke">Live with a smoker?:</label>
