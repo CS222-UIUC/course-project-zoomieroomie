@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import '../css/form_style.css';
+import { Link } from "react-router-dom";
 
 interface FormData {
   // Define the type of each form field
@@ -118,9 +120,9 @@ const MyForm: React.FC = () => {
             name="drink"
             value={formData.drink}
             onChange={handleChange}
-            />
-            </div>
-            <div className="form-input">
+          />
+        </div>
+        <div className="form-input">
       <label htmlFor="l-extrovert">Live with an extrovert?:</label>
       <input
         type="text"
@@ -143,7 +145,7 @@ const MyForm: React.FC = () => {
     </div>
 
     <div className="form-input">
-      <label htmlFor="study">How often do you study at home?:</label>
+      <label htmlFor="study">How often do you study?:</label>
       <input
         type="text"
         id="study"
@@ -154,7 +156,7 @@ const MyForm: React.FC = () => {
     </div>
 
     <div className="form-input">
-      <label htmlFor="sleep">What time do you usually go to sleep?:</label>
+      <label htmlFor="sleep">How many hours do you sleep?:</label>
       <input
         type="text"
         id="sleep"
@@ -166,7 +168,7 @@ const MyForm: React.FC = () => {
 
     <div className="form-input">
       <label htmlFor="bedtime-school">
-        What time do you usually go to bed on school nights?:
+        What time do you go to bed on a school night?:
       </label>
       <input
         type="text"
@@ -179,7 +181,7 @@ const MyForm: React.FC = () => {
 
     <div className="form-input">
       <label htmlFor="bedtime-weekend">
-        What time do you usually go to bed on weekends?:
+        What time do you go to bed on the weekends?:
       </label>
       <input
         type="text"
@@ -212,7 +214,7 @@ const MyForm: React.FC = () => {
       />
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit"><Link to="/Main">Submit</Link></button>
   </form>
 </div>
 );
