@@ -21,6 +21,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/preferencesform" element={<HabitsAndPreferences />} />
           <Route path="/matches" element={<RoommateMatches />} />
+          <Route path="/form_script" element={<MyForm />} />
          <Route path="/preferences" element={<Preferences />} />
           <Route path="/*" element={<Navigate to="/login" replace />} />
         </Routes>
